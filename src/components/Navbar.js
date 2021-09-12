@@ -7,7 +7,7 @@ export default function Navbar(){
         <StyledNavbar>
             <StyledNavBrand> 
                 <Link to="/">
-                    Learn.Build.<Accent>Type.</Accent>
+                    React.Airtable.Serverless.<Accent>Game.</Accent>
                 </Link>
             </StyledNavBrand>
             <StyledNavItems>
