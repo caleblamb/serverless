@@ -11,26 +11,34 @@ export default function GameOver({history}){
     } 
     
     useEffect(() => {
-        const saveHighScore = async()=>{
-            const options ={
-                method: "POST",
-                body: JSON.stringify( {name: "Caleb", score}),
-            };
-            const res = await fetch('/.netlify/functions/saveHighScore', options);
-            const data = await res.json();
-            if (data.id) {
-                    setScoreMessage('Congrats! You got a high score!!');
+        const saveHighScore = async () => {
+            try {
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({ name: 'Caleb', score }),
+                };
+                const res = await fetch(
+                    '/.netlify/functions/saveHighScore',
+                    options
+                );
+                const data = await res.json();
+                if (data.id) {
+                    setScoreMessage('Congrats! You got a high score!');
                 } else {
                     setScoreMessage('Sorry, not a high score. Keep trying!');
                 }
+            } catch (err) {
+                console.error(err);
+            }
         };
         saveHighScore();
     }, [score]);
     return (
         <div>
             <h1>Game Over</h1>
-            <p>{scoreMessage}</p>
-            <StyledChar>{score}</StyledChar>
+            <h2>{scoreMessage}</h2>
+
+            <StyledCharacter>{score}</StyledCharacter>
             <div>
                 <StyledLink to="/">Go Home</StyledLink>
             </div>
@@ -38,5 +46,5 @@ export default function GameOver({history}){
                 <StyledLink to="/game">Play Again</StyledLink>
             </div>
         </div>
-        );
+    );
 }

@@ -59,7 +59,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 500,
             body: JSON.stringify({
-                err: 'Failed to save score in Airtabl',
+                err: 'Failed to save score in Airtable',
             }),
         };
     }
