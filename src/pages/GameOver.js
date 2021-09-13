@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useScore } from '../contexts/ScoreContext';
 import { StyledLink } from '../styled/Navbar';
 import { StyledChar } from '../styled/Game';
+import { StyledTitle } from '../styled/Random';
 
 export default function GameOver({history}){
     const [score] = useScore();
@@ -35,16 +36,16 @@ export default function GameOver({history}){
     }, [score]);
     return (
         <div>
-            <h1>Game Over</h1>
-            <h2>{scoreMessage}</h2>
-
+            <StyledTitle>Game Over</StyledTitle>
+            
             <StyledChar>{score}</StyledChar>
+            
             <div>
                 <StyledLink to="/">Go Home</StyledLink>
             </div>
             <div>
                 <StyledLink to="/game">Play Again</StyledLink>
-            </div>
+                </div>
         </div>
     );
 }
