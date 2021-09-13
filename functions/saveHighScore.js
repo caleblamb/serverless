@@ -14,26 +14,19 @@ exports.handler = async (event) => {
             body: JSON.stringify({ err: 'That method is not allowed' }),
         };
     }
+
     const { score, name } = JSON.parse(event.body);
     if (typeof score === 'undefined' || !name) {
         return {
-            statusCode: 405,
+            statusCode: 400,
             body: JSON.stringify({ err: 'Bad request' }),
         };
     }
 
     try {
-        const records = await table
-            .select({
-                sort: [{ field: 'score', direction: 'desc' }],
-            })
-            .firstPage();
-        const formattedRecords = records.map((record) => ({
-            id: record.id,
-            fields: record.fields,
-        }));
+        const records = await getHighScores(false);
 
-        const lowestRecord = formattedRecords[9];
+        const lowestRecord = records[9];
         if (
             typeof lowestRecord.fields.score === 'undefined' ||
             score > lowestRecord.fields.score
