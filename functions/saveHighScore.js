@@ -8,8 +8,8 @@ exports.handler = async (event) => {
         };
     }
 
-    const { score, name } = JSON.parse(event.body);
-    if (typeof score === 'undefined' || !name) {
+    const { score, player } = JSON.parse(event.body);
+    if (typeof score === 'undefined' || !player) {
         return {
             statusCode: 400,
             body: JSON.stringify({ err: 'Bad request' }),
@@ -27,7 +27,7 @@ exports.handler = async (event) => {
             //update this record with the incoming score
             const updatedRecord = {
                 id: lowestRecord.id,
-                fields: { name, score },
+                fields: { player, score },
             };
             await table.update([updatedRecord]);
             return {
