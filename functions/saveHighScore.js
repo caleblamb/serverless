@@ -1,11 +1,4 @@
-const Airtable = require('airtable');
-
-Airtable.configure({
-    apiKey: 'keyjSkeH7g5vv2oHe',
-});
-
-const base = Airtable.base('appvsJrTK9VfH8jNT');
-const table = base.table('scores');
+const { table, getHighScores } = require('./utils/airtable');
 
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
@@ -15,8 +8,8 @@ exports.handler = async (event) => {
         };
     }
 
-    const { score, player } = JSON.parse(event.body);
-    if (typeof score === 'undefined' || !player) {
+    const { score, name } = JSON.parse(event.body);
+    if (typeof score === 'undefined' || !name) {
         return {
             statusCode: 400,
             body: JSON.stringify({ err: 'Bad request' }),
@@ -34,7 +27,7 @@ exports.handler = async (event) => {
             //update this record with the incoming score
             const updatedRecord = {
                 id: lowestRecord.id,
-                fields: { player, score },
+                fields: { name, score },
             };
             await table.update([updatedRecord]);
             return {
@@ -52,7 +45,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 500,
             body: JSON.stringify({
-                err: 'Failed to save score in Airtable',
+                err: 'Failed to save score in Airtabl',
             }),
         };
     }
