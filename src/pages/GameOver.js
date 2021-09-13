@@ -15,7 +15,7 @@ export default function GameOver({history}){
             try {
                 const options = {
                     method: 'POST',
-                    body: JSON.stringify({ name: 'Caleb', score }),
+                    body: JSON.stringify({ player: 'Caleb', score }),
                 };
                 const res = await fetch(
                     '/.netlify/functions/saveHighScore',
