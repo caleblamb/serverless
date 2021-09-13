@@ -38,7 +38,7 @@ export default function GameOver({history}){
             <h1>Game Over</h1>
             <h2>{scoreMessage}</h2>
 
-            <StyledCharacter>{score}</StyledCharacter>
+            <StyledChar>{score}</StyledChar>
             <div>
                 <StyledLink to="/">Go Home</StyledLink>
             </div>
